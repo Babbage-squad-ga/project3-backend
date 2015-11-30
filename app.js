@@ -12,6 +12,8 @@ process.env.SESSION_SECRET || require('dotenv').load();
 var cors = require('cors');
 var passport = require('./lib/passport');
 
+var cors = require('cors');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -52,6 +54,10 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
+app.use(cors({
+ origin: ['http://localhost:5000'],
+ credentials: true
+}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
