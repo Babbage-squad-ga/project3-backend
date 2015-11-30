@@ -16,6 +16,7 @@ var cors = require('cors');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var survey = require('./routes/survey');
 
 var app = express();
 
@@ -58,6 +59,7 @@ app.use(cors({
  origin: ['http://localhost:5000'],
  credentials: true
 }));
+app.use('/survey', survey);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
