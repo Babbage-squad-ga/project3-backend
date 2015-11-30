@@ -17,7 +17,6 @@ var surveySchema = new Schema({
   },
   surveyURL : {
     type : String,
-    unique : true,
     required : true
   },
   surveyCreator : {
