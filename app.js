@@ -17,6 +17,7 @@ var cors = require('cors');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var survey = require('./routes/survey');
+var result = require('./routes/results')
 
 var app = express();
 
@@ -60,6 +61,7 @@ app.use(cors({
  credentials: true
 }));
 app.use('/survey', survey);
+app.use('/result', result);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
