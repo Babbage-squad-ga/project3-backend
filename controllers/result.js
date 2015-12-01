@@ -15,7 +15,6 @@ module.exports = {
             }
 
             var pResults = new Promise(function(res, rej) {
-                console.log(req.body);
                 Result.create({
                     surveyName : req.body.surveyname,
                     surveyQuestion : req.body.surveyquestion
@@ -40,15 +39,33 @@ module.exports = {
 
     update : {
         patch : function(req, res, next) {
-            if(!req.body || !req.body.takerage || !req.body.takercity || !req.body.takernickname || !req.body.surveyanswer ) {
+            if(!req.body || !req.body.takerage || !req.body.takercity || !req.body.takernickname || !req.body.surveyanswer || !req.body.surveyname ) {
                 var err = new Error("Empty fields.");
                 return next(err);
 
             };
+            var pResults = new Promise(function(req, res) {
 
+
+
+                Result.update({surveyname : req.body.surveyname},
+                    {$push: {
+                      takerAnswers: {takerage: req.body.takerage, takercity: req.body.takercity , takeranswer: req.body.surveyanswer,}
+                  }});
+
+            }).catch(function(error) {
+                next(error);
+            });
+
+
+
+        pResults.then(function() {
             res.sendStatus(200);
-        }
+        }).catch(function(err) {
+            next(err);
+        });
     }
+}
 
 
 };
