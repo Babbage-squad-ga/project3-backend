@@ -14,18 +14,18 @@ module.exports = {
                 return next(err);
             }
 
-            var pResults = new Promise(function(res, rej) {
+            var pResults = new Promise(function(resolve, reject) {
                 Result.create({
                     surveyName : req.body.surveyname,
                     surveyQuestion : req.body.surveyquestion
 
                 }, function(err, user) {
                     if(err) {
-                        rej(err);
+                        reject(err);
                         return;
                     }
 
-                    res(user);
+                    resolve(user);
                 });
             });
             pResults.then(function() {
@@ -44,28 +44,16 @@ module.exports = {
                 return next(err);
 
             };
-            var pResults = new Promise(function(req, res) {
 
-
-
-                Result.update({surveyname : req.body.surveyname},
-                    {$push: {
-                      takerAnswers: {takerage: req.body.takerage, takercity: req.body.takercity , takeranswer: req.body.surveyanswer,}
-                  }});
-
-            }).catch(function(error) {
-                next(error);
+            Result.update({surveyName : req.body.surveyname},
+                {$push: {
+                  takerAnswers: {takerage: req.body.takerage, takercity: req.body.takercity , takernickname: req.body.takernickname, surveyanswer: req.body.surveyanswer}
+              }}).then(function() {
+                res.sendStatus(200).catch(function(error) {
+                    next(error);
+                });
             });
+        }
 
-
-
-        pResults.then(function() {
-            res.sendStatus(200);
-        }).catch(function(err) {
-            next(err);
-        });
     }
-}
-
-
 };
