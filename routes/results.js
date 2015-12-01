@@ -12,4 +12,9 @@ router.route('/makenew').
   get(resultsCtrl.deny).
   post(resultsCtrl.makenew.post);
 
+
+ router.route('/update').
+  get(resultsCtrl.deny).
+  patch(resultsCtrl.update.patch);
+
 module.exports = router;

@@ -10,23 +10,11 @@ var resultsSchema = new Schema({
     type : String,
     required : true
   },
-  takerAge : {
-    type : String,
-    required : true
-  },
-  takerCity : {
-    type : String,
-    required : true
-  },
   surveyQuestion : {
     type : String,
     required : true
   },
-  takerAnswer : {
-    type: String,
-    required : true
-
-  }
+  takerAnswers : []
 });
 
 //resultsSchema.plugin(uniqueValidator);
