@@ -4,6 +4,7 @@
 // req.user.id   _id
 
 var Survey = require('../models').model('Survey');
+var randomBytes = require('randombytes');
 
 
 module.exports = {
@@ -18,13 +19,17 @@ module.exports = {
             }
 
             var pSurvey = new Promise(function(res, rej) {
-                console.log(req.body);
+                var rBytes = randomBytes(16);
+                var randomURL =
+                    rBytes.reduce(function(previousValue, currentValue) {
+                        return previousValue + currentValue.toString(16);
+                        },"");
+
                 var splitAnswers = req.body.surveyanswers.split("/*/");
-                console.log(splitAnswers);
                 Survey.create({
                     surveyName : req.body.surveyname,
                     surveyQuestion : req.body.surveyquestion,
-                    surveyURL: req.body.surveyurl,
+                    surveyURL: randomURL,
                     surveyAnswers: splitAnswers,
                     surveyCreator: req.body.surveyowner
 
