@@ -22,8 +22,14 @@ module.exports = {
                 var rBytes = randomBytes(16);
                 var randomURL =
                     rBytes.reduce(function(previousValue, currentValue) {
+                        if (currentValue.toString(16).length===1) {
+                            previousValue += '0';
+                            }
                         return previousValue + currentValue.toString(16);
                         },"");
+
+                if (randomURL.length !== 32)
+                    console.log("Error, randomURL not correct");
 
                 var splitAnswers = req.body.surveyanswers.split("/*/");
                 Survey.create({
@@ -51,14 +57,17 @@ module.exports = {
     },
 
     survey : {
-    get : function(req, res) {
-
+    get : function(req, res, next) {
+            if(!(req.query.q.length === 32)) {
+                var err = new Error("Incorrect URL length");
+                return next(err);
+            }
 
         // Survey.find({_id:"565cb466f29f770c1a23fb28"}, { __v: 0 }).exec().then(
         // Survey.find({_id:"565cb466f29f770c1a23fb28"}).exec().then(
         // Survey.find().exec().then(
-            Survey.findOne().exec().then(
         // Survey.find({surveyURL:"ZXY"}).exec().then(
+            Survey.findOne({surveyURL: req.query.q}).exec().then(
              function(survey) {
                 res.json(survey);
           }).catch(function(error) {
