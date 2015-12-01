@@ -31,7 +31,7 @@ module.exports = {
                     surveyQuestion : req.body.surveyquestion,
                     surveyURL: randomURL,
                     surveyAnswers: splitAnswers,
-                    surveyCreator: req.body.surveyowner
+                    surveyCreator: "TBD"
 
                 }, function(err, user) {
                     if(err) {
