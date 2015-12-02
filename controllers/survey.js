@@ -23,6 +23,8 @@ module.exports = {
                 var rBytes = randomBytes(16);
                 randomURL =
                     rBytes.reduce(function(previousValue, currentValue) {
+                        // If the byte start wit a '0' it is lost when using toString
+                        // in this case manually add it in
                         if (currentValue.toString(16).length===1) {
                             previousValue += '0';
                             }
@@ -32,6 +34,8 @@ module.exports = {
                 if (randomURL.length !== 32)
                     console.log("Error, randomURL not correct");
 
+                // We are using "/*/" as a delimiter to separate the individual
+                // a answer that are catenated together in the input string
                 var splitAnswers = req.body.surveyanswers.split("/*/");
                 Survey.create({
                     surveyName : req.body.surveyname,
