@@ -13,6 +13,7 @@ module.exports = {
     },
     makenew : {
         post : function(req, res, next) {
+            var randomURL = "";
             if(!req.body || !req.body.surveyname || !req.body.surveyquestion) {
                 var err = new Error("Empty fields.");
                 return next(err);
@@ -20,7 +21,7 @@ module.exports = {
 
             var pSurvey = new Promise(function(res, rej) {
                 var rBytes = randomBytes(16);
-                var randomURL =
+                randomURL =
                     rBytes.reduce(function(previousValue, currentValue) {
                         if (currentValue.toString(16).length===1) {
                             previousValue += '0';
@@ -49,7 +50,10 @@ module.exports = {
                 });
             });
             pSurvey.then(function() {
-                res.sendStatus(200);
+                res.json({
+                    rURL : randomURL});
+
+                //res.sendStatus(200);
             }).catch(function(err) {
                 next(err);
             });
