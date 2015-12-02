@@ -6,15 +6,20 @@ var router = express.Router();
 var resultsCtrl = require('../controllers/result');
 
 /* GET home page. */
-//router.get('/', resultsCtrl.root.get);
+router.get('/', resultsCtrl.result.get);
 
 router.route('/makenew').
-  get(resultsCtrl.deny).
-  post(resultsCtrl.makenew.post);
+get(resultsCtrl.deny).
+post(resultsCtrl.makenew.post);
 
 
- router.route('/update').
-  get(resultsCtrl.deny).
-  patch(resultsCtrl.update.patch);
+router.route('/update').
+get(resultsCtrl.deny).
+patch(resultsCtrl.update.patch);
+
+
+router.route('/result').
+get(resultsCtrl.deny).
+get(resultsCtrl.result.get);
 
 module.exports = router;

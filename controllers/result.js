@@ -53,7 +53,19 @@ module.exports = {
                     next(error);
                 });
             });
-        }
+          }
 
+      },
+
+      result : {
+        get : function(req, res, next){
+            Result.findOne({surveyName: req.query.q}).exec().then(
+               function(result) {
+                res.json(result);
+            }).catch(function(error) {
+                next(error);
+            });
+
+        }
     }
 };
