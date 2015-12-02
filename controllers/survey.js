@@ -53,13 +53,9 @@ module.exports = {
                     res(user);
                 });
             });
-pSurvey.then(function() {
-    res.json({
-        rURL : randomURL});
-
-                //res.sendStatus(200);
-            }).catch(function(err) {
-                next(err);
+            pSurvey.then(function() {
+                res.json({rURL : randomURL});}).catch(function(err) {
+                    next(err);
             });
         }
     },

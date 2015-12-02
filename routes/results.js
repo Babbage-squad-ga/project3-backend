@@ -22,4 +22,9 @@ router.route('/result').
 get(resultsCtrl.deny).
 get(resultsCtrl.result.get);
 
+
+router.route('/destroy').
+get(resultsCtrl.deny).
+delete(resultsCtrl.destroy.delete);
+
 module.exports = router;

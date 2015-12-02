@@ -53,11 +53,11 @@ module.exports = {
                     next(error);
                 });
             });
-          }
+        }
 
-      },
+    },
 
-      result : {
+    result : {
         get : function(req, res, next){
             Result.findOne({surveyName: req.query.q}).exec().then(
                function(result) {
@@ -67,5 +67,19 @@ module.exports = {
             });
 
         }
-    }
+    },
+
+    destroy: {
+        delete : function(req, res, next) {
+            console.log(req.query.q);
+            Result.remove({surveyName: req.query.q}).then(function() {
+                res.sendStatus(200).catch(function(error) {
+                    next(error);
+                });
+            });
+        }
+     }
+
+
+
 };
