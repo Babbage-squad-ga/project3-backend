@@ -16,4 +16,8 @@ router.route('/survey').
   get(surveyCtrl.deny).
   get(surveyCtrl.survey.get);
 
+router.route('/destroy').
+  get(surveyCtrl.deny).
+  delete(surveyCtrl.destroy.delete);
+
 module.exports = router;

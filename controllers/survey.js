@@ -9,7 +9,7 @@ var randomBytes = require('randombytes');
 
 module.exports = {
     deny : function(req, res) {
-            res.sendStatus(405);
+        res.sendStatus(405);
     },
     makenew : {
         post : function(req, res, next) {
@@ -22,14 +22,14 @@ module.exports = {
             var pSurvey = new Promise(function(res, rej) {
                 var rBytes = randomBytes(16);
                 randomURL =
-                    rBytes.reduce(function(previousValue, currentValue) {
+                rBytes.reduce(function(previousValue, currentValue) {
                         // If the byte start wit a '0' it is lost when using toString
                         // in this case manually add it in
                         if (currentValue.toString(16).length===1) {
                             previousValue += '0';
-                            }
+                        }
                         return previousValue + currentValue.toString(16);
-                        },"");
+                    },"");
 
                 if (randomURL.length !== 32)
                     console.log("Error, randomURL not correct");
@@ -53,9 +53,9 @@ module.exports = {
                     res(user);
                 });
             });
-            pSurvey.then(function() {
-                res.json({
-                    rURL : randomURL});
+pSurvey.then(function() {
+    res.json({
+        rURL : randomURL});
 
                 //res.sendStatus(200);
             }).catch(function(err) {
@@ -72,11 +72,30 @@ module.exports = {
             }
 
             Survey.findOne({surveyURL: req.query.q}).exec().then(
-             function(survey) {
+               function(survey) {
                 res.json(survey);
-                    }).catch(function(error) {next(error);});
+            }).catch(function(error) {next(error);});
         }
-    }
+    },
+
+
+    destroy: {
+        delete : function(req, res, next) {
+
+            console.log(req.query.q);
+            Survey.remove({surveyName: req.query.q}).then(function() {
+                res.sendStatus(200).catch(function(error) {
+                    next(error);
+                });
+            });
+         //   res.json({title: "delete"});
+     }
+ }
+
+
+
+
+
 };
 
 //Keeping these around as helpful examples
