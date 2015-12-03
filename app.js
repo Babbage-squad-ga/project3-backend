@@ -56,10 +56,6 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
-app.use(cors({
- origin: ['http://localhost:5000'],
- credentials: true
-}));
 app.use('/survey', survey);
 app.use('/result', result);
 
