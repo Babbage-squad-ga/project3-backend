@@ -19,15 +19,26 @@ These collections, models and routers originate from https://github.com/ga-wdi-b
 
 
 
-###Collection for Completed Surveys
+###Collections
+
+Survey Collection
+
+| surveyName | 'string'
+| surveyQuestion | 'string'
+| surveyURL | 'string'
+| surveyAnswers | []
+| surveyCreator |  'string'
+
+Results Collection
 
 | Field | Document |
 | :----- | :--- |
-| survey_name | 'string'
-| question_asked | 'string'
-| answer_given | integer
-| age | integer
-| city | 'string'
+| surveyName | 'string'
+| surveyQuestion | 'string'
+| takerAnswers | []
+
+
+
 
 ####Validations and Constraints for
 * Answer must be a number
@@ -44,7 +55,7 @@ These collections, models and routers originate from https://github.com/ga-wdi-b
 * Each question belongs to a survey
 
 
-###ActiveRecord operations (for planning purposes,  may not be a complete list)
+
 
 
 
