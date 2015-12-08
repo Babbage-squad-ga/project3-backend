@@ -1,4 +1,4 @@
-:;# README For Project 3 Survey - Backend Portion of the Project
+# README For Project 3 Survey - Backend Portion of the Project
 
 For general information and details on the UI portion of this project see
 https://github.com/Babbage-squad-ga/project3-frontend/blob/master/README.md
@@ -19,15 +19,26 @@ These collections, models and routers originate from https://github.com/ga-wdi-b
 
 
 
-###Collection for Completed Surveys
+###Collections
+
+Survey Collection
+
+| surveyName | 'string'
+| surveyQuestion | 'string'
+| surveyURL | 'string'
+| surveyAnswers | []
+| surveyCreator |  'string'
+
+Results Collection
 
 | Field | Document |
 | :----- | :--- |
-| survey_name | 'string'
-| question_asked | 'string'
-| answer_given | integer
-| age | integer
-| city | 'string'
+| surveyName | 'string'
+| surveyQuestion | 'string'
+| takerAnswers | []
+
+
+
 
 ####Validations and Constraints for
 * Answer must be a number
@@ -44,12 +55,14 @@ These collections, models and routers originate from https://github.com/ga-wdi-b
 * Each question belongs to a survey
 
 
-###ActiveRecord operations (for planning purposes,  may not be a complete list)
+
 
 
 
 
 ###Authorization and Authentication
 User authorization and authentication is provided by the express-passport repo that Saad provided.
+
 ### URL For The Backend Server
-https://powerful-earth-3914.herokuapp.com/
+https://desolate-mountain-2607.herokuapp.com
+

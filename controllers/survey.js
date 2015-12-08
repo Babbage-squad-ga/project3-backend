@@ -14,7 +14,8 @@ module.exports = {
     makenew : {
         post : function(req, res, next) {
             var randomURL = "";
-            if(!req.body || !req.body.surveyname || !req.body.surveyquestion) {
+            if(!req.body || !req.body.surveyname || !req.body.surveyquestion ||
+                !req.user || !req.user.userName) {
                 var err = new Error("Empty fields.");
                 return next(err);
             }
@@ -42,7 +43,7 @@ module.exports = {
                     surveyQuestion : req.body.surveyquestion,
                     surveyURL: randomURL,
                     surveyAnswers: splitAnswers,
-                    surveyCreator: "TBD"
+                    surveyCreator: req.user.userName
 
                 }, function(err, user) {
                     if(err) {
