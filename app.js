@@ -24,7 +24,7 @@ var app = express();
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(cors({
- origin: ['http://localhost:5000'],
+ origin: ['http://localhost:5000', "http://babbage-squad-ga.github.io"],
  credentials: true
 }));
 
